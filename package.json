@@ -1,0 +1,32 @@
+{
+  "name": "my_flickr_image_searcher",
+  "version": "1.0.0",
+  "description": "Flickr image api one page app",
+  "main": "app.js",
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "express": "^4.13.3",
+    "flickrapi": "^0.3.36",
+    "less-middleware": "^2.0.1",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "author": "Danny Dunkling",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dannydunkling/dannys-test-app.git"
+  },
+  "keywords": [
+    "flickr",
+    "image",
+    "searcher"
+  ],
+  "bugs": {
+    "url": "https://github.com/dannydunkling/dannys-test-app/issues"
+  },
+  "homepage": "https://github.com/dannydunkling/dannys-test-app#readme"
+}

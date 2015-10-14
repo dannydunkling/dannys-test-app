@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  </head>
+
+  <body>
+  <script>
+  function imageSearch() {
+    alert("Search function goes here");
+  }
+
+
+      $( function( ) {
+
+      var url = 'api/';
+      var searchTerm = 'fish';
+      var SearchReturn = '9';
+
+      
+      var success = function( data ) {
+        var items = [ ];
+        
+        $.each( data, function( key, val ) {
+          items.push( '<li class="col-lg-4 col-md-4 col-sm-1"> <img src=" ' + val.url + '" />'+ val.id + '<a href="'+ val.url + '>"<p>' + val.title + '</p></a></li>' );
+        });
+        $( "<ul>", {
+          html: items
+        }).appendTo( "#images" );
+      };
+
+      $.ajax({
+        dataType: "json",
+        url: url,
+        data: {q: searchTerm, size: SearchReturn },
+        success: success
+      });
+
+      });
+
+ 
+  </script>
+      <div id="navbar" class="navbar navbar-default">
+        <div class="container">
+          <h2 class="pull-left">Danny's Flickr App</h2>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Search for images here!" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success" id="search" onclick="imageSearch()">Search</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row well" id="images">
+            
+        </div>
+      </div>
+    
+  </body>
