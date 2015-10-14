@@ -36,7 +36,7 @@
           var items = [ ];
   
           $.each( data, function( key, val ) {
-            items.push( '<li class="col-lg-4 col-md-3 col-sm-12"> <img src=" ' + val.url + '" /><p class="user-id"> User ID: '+ val.id + '</p><a href="'+ val.url + '" class="btn btn-info">' + val.title + '</a></li>' );
+            items.push( '<li class="col-lg-4 col-md-3 col-sm-12"> <img src=" ' + val.url + '" /><p class="text-primary"> User ID: '+ val.id + '</p><a href="'+ val.url + '" class="btn btn-info">' + val.title + '</a></li>' );
           });
           
           $( "<ul>", {
