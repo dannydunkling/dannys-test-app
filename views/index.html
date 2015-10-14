@@ -11,48 +11,55 @@
 
   <body>
   <script>
-  function imageSearch() {
-    alert("Search function goes here");
-  }
-
-
-      $( function( ) {
-
+    
+    function postLoadedScript( ) {
+      $( '#search-form' ).on( 'submit', function ( e ) {
+        e.preventDefault( );
+        imageSearch( );
+      } );
+      imageSearch( );
+    }
+    
+    function imageSearch( ) {
       var url = 'api/';
-      var searchTerm = 'fish';
+      var input = $('input[name="search-term"]');
+      var searchTerm = ( input.val( ) == '' ) ? 'fish' : input.val( );
       var SearchReturn = '9';
-
-      
-      var success = function( data ) {
-        var items = [ ];
-        
-        $.each( data, function( key, val ) {
-          items.push( '<li class="col-lg-4 col-md-4 col-sm-1"> <img src=" ' + val.url + '" />'+ val.id + '<a href="'+ val.url + '>"<p>' + val.title + '</p></a></li>' );
-        });
-        $( "<ul>", {
-          html: items
-        }).appendTo( "#images" );
-      };
-
+  
       $.ajax({
         dataType: "json",
         url: url,
-        data: {q: searchTerm, size: SearchReturn },
-        success: success
+        data: { q: searchTerm, size: SearchReturn },
+        success: function ( data ) {
+          $( '#images' ).html( '' );
+  
+          var items = [ ];
+  
+          $.each( data, function( key, val ) {
+            items.push( '<li class="col-lg-4 col-md-3 col-sm-12"> <img src=" ' + val.url + '" /><p class="user-id"> User ID: '+ val.id + '</p><a href="'+ val.url + '" class="btn btn-info">' + val.title + '</a></li>' );
+          });
+          
+          $( "<ul>", {
+            html: items
+          }).appendTo( "#images" );
+        }
       });
+    }
+  
+    // Check for browser support, then post load the javascript
+    if (window.addEventListener) window.addEventListener("load", postLoadedScript, false);
+    else if (window.attachEvent) window.attachEvent("onload", postLoadedScript);
+    else window.onload = postLoadedScript;
 
-      });
-
- 
   </script>
       <div id="navbar" class="navbar navbar-default">
         <div class="container">
           <h2 class="pull-left">Danny's Flickr App</h2>
-          <form class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right" id="search-form" action="#">
             <div class="form-group">
-              <input type="text" placeholder="Search for images here!" class="form-control">
+              <input type="text" name="search-term" placeholder="Search for images here!" class="form-control pull-left">
             </div>
-            <button type="submit" class="btn btn-success" id="search" onclick="imageSearch()">Search</button>
+            <button type="submit" class="btn btn-success pull-right">Search</button>
           </form>
         </div>
       </div>
